@@ -75,7 +75,20 @@ export function HomePage() {
 
       <div className="module-grid home-module-grid">
         {visibleGroups.map((group) => (
-          <article key={group.key} className="module-card modern-module-card">
+          <article
+            key={group.key}
+            className="module-card modern-module-card clickable-module-card"
+            onClick={() => setSelectedGroup(group)}
+            onKeyDown={(event) => {
+              if (event.key === 'Enter' || event.key === ' ') {
+                event.preventDefault()
+                setSelectedGroup(group)
+              }
+            }}
+            tabIndex={0}
+            role="button"
+            aria-label={`Abrir submenu de ${group.label}`}
+          >
             <div className="module-card-header">
               <span className="module-icon-badge">
                 <MenuIcon type={group.icon} />
@@ -86,13 +99,6 @@ export function HomePage() {
               </div>
               <span className="module-chevron">›</span>
             </div>
-            <button
-              type="button"
-              className="module-open-btn"
-              onClick={() => setSelectedGroup(group)}
-            >
-              Ver modulo
-            </button>
           </article>
         ))}
       </div>
@@ -102,8 +108,14 @@ export function HomePage() {
           <div className="modal-card modern-modal" onClick={(event) => event.stopPropagation()}>
             <div className="modal-header">
               <h3>Submenus de {selectedGroup.label}</h3>
-              <button type="button" className="modal-close-btn" onClick={() => setSelectedGroup(null)}>
-                Fechar
+              <button
+                type="button"
+                className="modal-close-icon-btn"
+                onClick={() => setSelectedGroup(null)}
+                aria-label="Fechar modal"
+                title="Fechar"
+              >
+                ×
               </button>
             </div>
             <div className="modal-links">

@@ -338,11 +338,11 @@ body {
 .module-grid {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 16px;
+  gap: 18px;
 }
 
 .home-module-grid {
-  margin-top: 6px;
+  margin-top: 10px;
 }
 
 .module-card {
@@ -353,15 +353,27 @@ body {
 .modern-module-card {
   background: #fff;
   border: 1px solid #e2e8f0;
-  border-radius: 14px;
-  padding: 14px;
-  box-shadow: 0 8px 20px rgba(15, 23, 42, 0.04);
-  transition: transform 0.15s ease, box-shadow 0.15s ease;
+  border-radius: 16px;
+  padding: 20px;
+  min-height: 148px;
+  box-shadow: 0 10px 24px rgba(15, 23, 42, 0.05);
+  transition: transform 0.28s ease, box-shadow 0.28s ease, border-color 0.28s ease;
+  animation: cardFadeIn 0.38s ease both;
 }
 
 .modern-module-card:hover {
-  transform: translateY(-1px);
-  box-shadow: 0 14px 24px rgba(15, 23, 42, 0.08);
+  transform: translateY(-3px) scale(1.01);
+  border-color: #bfdbfe;
+  box-shadow: 0 18px 30px rgba(15, 23, 42, 0.1);
+}
+
+.clickable-module-card {
+  cursor: pointer;
+}
+
+.clickable-module-card:focus-visible {
+  outline: 3px solid rgba(37, 99, 235, 0.35);
+  outline-offset: 2px;
 }
 
 .module-card-header {
@@ -387,29 +399,25 @@ body {
 
 .module-card-header h3 {
   margin: 0;
+  font-size: 1.18rem;
 }
 
 .module-card-header p {
-  margin: 3px 0 0;
+  margin: 4px 0 0;
   color: #64748b;
-  font-size: 0.86rem;
+  font-size: 0.9rem;
 }
 
 .module-chevron {
   margin-left: auto;
   color: #94a3b8;
-  font-size: 1.3rem;
+  font-size: 1.45rem;
+  transition: transform 0.28s ease, color 0.28s ease;
 }
 
-.module-open-btn {
-  width: fit-content;
-  padding: 7px 12px;
-  font-size: 0.85rem;
-  background: #0f172a;
-}
-
-.module-open-btn:hover {
-  background: #1e293b;
+.modern-module-card:hover .module-chevron {
+  transform: translateX(2px);
+  color: #64748b;
 }
 
 .modal-overlay {
@@ -420,6 +428,7 @@ body {
   place-items: center;
   padding: 18px;
   z-index: 1000;
+  animation: modalOverlayIn 0.2s ease;
 }
 
 .modal-card {
@@ -434,6 +443,7 @@ body {
 .modern-modal {
   border-radius: 16px;
   padding: 18px;
+  animation: modalCardIn 0.24s ease;
 }
 
 .modal-header {
@@ -460,6 +470,27 @@ body {
   background: #e2e8f0;
 }
 
+.modal-close-icon-btn {
+  width: 32px;
+  height: 32px;
+  border-radius: 999px;
+  background: #f8fafc;
+  color: #334155;
+  border: 1px solid #dbe3ed;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2rem;
+  line-height: 1;
+  padding: 0;
+}
+
+.modal-close-icon-btn:hover {
+  background: #eef2f7;
+  color: #0f172a;
+  border-color: #cbd5e1;
+}
+
 .modal-links {
   display: grid;
   gap: 8px;
@@ -471,10 +502,21 @@ body {
   padding: 10px 12px;
   border-radius: 8px;
   border: 1px solid #e2e8f0;
+  transition: background-color 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
 }
 
 .modal-link:hover {
   background: #f8fafc;
+  border-color: #cbd5e1;
+  transform: translateX(2px);
+}
+
+.quick-action,
+.menu-link,
+.sidebar-toggle,
+.menu-group-toggle {
+  transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease,
+    transform 0.2s ease;
 }
 
 .sidebar-collapsed .sidebar {
@@ -685,5 +727,36 @@ td {
 
   .topbar-actions {
     flex-wrap: wrap;
+  }
+}
+
+@keyframes cardFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes modalOverlayIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes modalCardIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
   }
 }
