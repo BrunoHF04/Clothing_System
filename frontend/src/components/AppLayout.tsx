@@ -5,7 +5,7 @@ import { useAuth } from '../auth/AuthContext'
 type MenuItem = {
   key: string
   label: string
-  icon: string
+  icon: 'gestao' | 'comercial' | 'estoque'
   children: Array<{
     path: string
     label: string
@@ -23,7 +23,7 @@ const menuItems: MenuItem[] = [
   {
     key: 'gestao',
     label: 'Gestao',
-    icon: '📊',
+    icon: 'gestao',
     children: [
       { path: '/dashboard', label: 'Dashboard' },
       { path: '/relatorios', label: 'Relatorios' },
@@ -34,7 +34,7 @@ const menuItems: MenuItem[] = [
   {
     key: 'comercial',
     label: 'Comercial',
-    icon: '🛍️',
+    icon: 'comercial',
     children: [
       { path: '/pdv', label: 'PDV' },
       { path: '/caixa', label: 'Caixa' },
@@ -46,7 +46,7 @@ const menuItems: MenuItem[] = [
   {
     key: 'estoque',
     label: 'Estoque',
-    icon: '📦',
+    icon: 'estoque',
     children: [
       { path: '/produtos', label: 'Produtos e Grade' },
       { path: '/estoque', label: 'Saldo de Estoque' },
@@ -62,6 +62,36 @@ const quickActions: QuickAction[] = [
   { path: '/consignacao', label: 'Nova Consignacao' },
   { path: '/clientes', label: 'Novo Cliente' },
 ]
+
+function MenuIcon({ type }: { type: MenuItem['icon'] }) {
+  if (type === 'gestao') {
+    return (
+      <svg viewBox="0 0 24 24" className="menu-icon" aria-hidden="true">
+        <path d="M4 19h16" />
+        <path d="M7 16V9" />
+        <path d="M12 16V5" />
+        <path d="M17 16v-3" />
+      </svg>
+    )
+  }
+  if (type === 'comercial') {
+    return (
+      <svg viewBox="0 0 24 24" className="menu-icon" aria-hidden="true">
+        <path d="M4 7h16l-1 4H5L4 7Z" />
+        <path d="M6 11l1 7h10l1-7" />
+        <path d="M9 18a1 1 0 1 0 0.001 0" />
+        <path d="M15 18a1 1 0 1 0 0.001 0" />
+      </svg>
+    )
+  }
+  return (
+    <svg viewBox="0 0 24 24" className="menu-icon" aria-hidden="true">
+      <path d="M4 8h16v10H4z" />
+      <path d="M9 8V5h6v3" />
+      <path d="M4 12h16" />
+    </svg>
+  )
+}
 
 export function AppLayout() {
   const { user, logout } = useAuth()
@@ -134,7 +164,9 @@ export function AppLayout() {
                     title={group.label}
                   >
                     <span className="menu-group-title">
-                      <span>{group.icon}</span>
+                      <span className="menu-group-icon-wrap">
+                        <MenuIcon type={group.icon} />
+                      </span>
                       <span className="menu-group-label">{group.label}</span>
                     </span>
                     <span className="menu-group-caret">{isOpen ? '▾' : '▸'}</span>
