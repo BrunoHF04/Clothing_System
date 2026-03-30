@@ -1,0 +1,1 @@
+{"root":["./src/app.tsx","./src/main.tsx","./src/vite-env.d.ts","./src/components/applayout.tsx","./src/pages/clientespage.tsx","./src/pages/consignacaopage.tsx","./src/pages/crediariopage.tsx","./src/pages/dashboardpage.tsx","./src/pages/estoquepage.tsx","./src/pages/pdvpage.tsx","./src/pages/produtospage.tsx"],"version":"5.9.3"}
