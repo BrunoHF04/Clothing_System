@@ -41,28 +41,29 @@ export function HomePage() {
   )
 
   return (
-    <section>
-      <header className="page-header">
-        <h2>Tela Inicial</h2>
-        <p>Acesso rapido por pesquisa ou por modulos do sistema.</p>
+    <section className="home-shell">
+      <header className="home-hero">
+        <h1>
+          Clothing System
+        </h1>
+        <p>Centralize sua gestao e encontre telas rapidamente.</p>
       </header>
 
-      <article className="card">
+      <article className="home-search-card">
         <label className="search-label">
-          Procurar telas pelo nome
           <input
             value={query}
             onChange={(event) => setQuery(event.target.value)}
-            placeholder="Ex: consignacao, pdv, relatorios..."
+            placeholder="Encontrar tela..."
           />
         </label>
-
         {normalizedQuery && (
           <div className="search-results">
             {foundChildren.length > 0 ? (
               foundChildren.map((item) => (
                 <NavLink key={item.path} to={item.path} className="search-result-link">
-                  {item.label} <span>{item.group}</span>
+                  <strong>{item.label}</strong>
+                  <span>{item.group}</span>
                 </NavLink>
               ))
             ) : (
@@ -72,20 +73,25 @@ export function HomePage() {
         )}
       </article>
 
-      <div className="module-grid">
+      <div className="module-grid home-module-grid">
         {visibleGroups.map((group) => (
-          <article key={group.key} className="card module-card">
+          <article key={group.key} className="module-card modern-module-card">
             <div className="module-card-header">
-              <span className="menu-group-icon-wrap">
+              <span className="module-icon-badge">
                 <MenuIcon type={group.icon} />
               </span>
               <div>
                 <h3>{group.label}</h3>
                 <p>{group.children.length} telas disponiveis</p>
               </div>
+              <span className="module-chevron">›</span>
             </div>
-            <button type="button" onClick={() => setSelectedGroup(group)}>
-              Abrir submenu
+            <button
+              type="button"
+              className="module-open-btn"
+              onClick={() => setSelectedGroup(group)}
+            >
+              Ver modulo
             </button>
           </article>
         ))}
@@ -93,10 +99,10 @@ export function HomePage() {
 
       {selectedGroup && (
         <div className="modal-overlay" onClick={() => setSelectedGroup(null)}>
-          <div className="modal-card" onClick={(event) => event.stopPropagation()}>
+          <div className="modal-card modern-modal" onClick={(event) => event.stopPropagation()}>
             <div className="modal-header">
               <h3>Submenus de {selectedGroup.label}</h3>
-              <button type="button" onClick={() => setSelectedGroup(null)}>
+              <button type="button" className="modal-close-btn" onClick={() => setSelectedGroup(null)}>
                 Fechar
               </button>
             </div>

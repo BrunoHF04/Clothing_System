@@ -7,7 +7,7 @@ import { menuItems, quickActions } from '../navigation/menu'
 export function AppLayout() {
   const { user, logout } = useAuth()
   const location = useLocation()
-  const [isSidebarCollapsed, setIsSidebarCollapsed] = useState(false)
+  const [isSidebarCollapsed, setIsSidebarCollapsed] = useState(true)
 
   const currentLabel =
     menuItems
@@ -46,7 +46,7 @@ export function AppLayout() {
       <aside className="sidebar">
         <div className="sidebar-head">
           <div>
-            <h1>ERP Fashion</h1>
+            <h1>Clothing System</h1>
             <p className="sidebar-subtitle">Servidor local</p>
           </div>
           <button
@@ -106,7 +106,7 @@ export function AppLayout() {
       <main className="content">
         <header className="topbar">
           <div>
-            <p className="topbar-breadcrumb">ERP Fashion / {currentLabel}</p>
+            <p className="topbar-breadcrumb">Clothing System / {currentLabel}</p>
             <h2 className="topbar-title">{currentLabel}</h2>
           </div>
           <div className="topbar-actions">

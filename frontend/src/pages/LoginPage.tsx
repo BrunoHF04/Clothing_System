@@ -44,7 +44,7 @@ export function LoginPage() {
   return (
     <div className="login-screen">
       <form className="login-card" onSubmit={onSubmit}>
-        <h1>ERP Fashion Local</h1>
+        <h1>Clothing System</h1>
         <p>Entre com seu perfil para acessar o sistema.</p>
         <label>
           Usuario
