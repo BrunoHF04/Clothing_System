@@ -17,6 +17,7 @@ import { MovimentacoesPage } from './pages/MovimentacoesPage'
 import { PdvPage } from './pages/PdvPage'
 import { ProdutosPage } from './pages/ProdutosPage'
 import { RelatoriosPage } from './pages/RelatoriosPage'
+import { HomePage } from './pages/HomePage'
 
 function App() {
   return (
@@ -24,7 +25,8 @@ function App() {
       <Route path="/login" element={<LoginPage />} />
       <Route element={<ProtectedRoute />}>
         <Route element={<AppLayout />}>
-          <Route path="/" element={<Navigate to="/dashboard" replace />} />
+          <Route path="/" element={<Navigate to="/inicio" replace />} />
+          <Route path="/inicio" element={<HomePage />} />
           <Route path="/dashboard" element={<DashboardPage />} />
           <Route path="/produtos" element={<ProdutosPage />} />
           <Route path="/estoque" element={<EstoquePage />} />
@@ -43,7 +45,7 @@ function App() {
           </Route>
         </Route>
       </Route>
-      <Route path="*" element={<Navigate to="/dashboard" replace />} />
+      <Route path="*" element={<Navigate to="/inicio" replace />} />
     </Routes>
   )
 }
