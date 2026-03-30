@@ -119,7 +119,9 @@ export function AppLayout() {
               ))}
           </div>
         </header>
-        <Outlet />
+        <div key={location.pathname} className="page-transition">
+          <Outlet />
+        </div>
       </main>
     </div>
   )
