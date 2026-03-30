@@ -27,11 +27,22 @@ body {
   min-height: 100vh;
 }
 
+.app-shell.sidebar-collapsed {
+  grid-template-columns: 84px 1fr;
+}
+
 .sidebar {
   background: #111827;
   color: #f9fafb;
   padding: 20px;
   border-right: 1px solid #1f2937;
+}
+
+.sidebar-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 8px;
 }
 
 .sidebar h1 {
@@ -51,6 +62,20 @@ body {
   color: #c7d2fe;
 }
 
+.sidebar-toggle {
+  min-width: 28px;
+  height: 28px;
+  border-radius: 8px;
+  background: #1e293b;
+  color: #cbd5e1;
+  border: 1px solid #334155;
+  padding: 0;
+}
+
+.sidebar-toggle:hover {
+  background: #334155;
+}
+
 .menu {
   display: flex;
   flex-direction: column;
@@ -62,9 +87,22 @@ body {
   gap: 8px;
 }
 
+.menu-group-toggle {
+  width: 100%;
+  background: transparent;
+  border: 0;
+  color: #93c5fd;
+  padding: 0;
+  display: flex;
+  justify-content: space-between;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  cursor: pointer;
+}
+
 .menu-group-title {
   margin: 0;
-  color: #93c5fd;
   font-size: 0.78rem;
   letter-spacing: 0.04em;
   text-transform: uppercase;
@@ -73,10 +111,27 @@ body {
   gap: 6px;
 }
 
+.menu-group-caret {
+  color: #60a5fa;
+  font-size: 0.78rem;
+}
+
 .submenu {
   display: flex;
   flex-direction: column;
   gap: 6px;
+  overflow: hidden;
+  transition: max-height 0.2s ease, opacity 0.2s ease;
+}
+
+.submenu-open {
+  max-height: 420px;
+  opacity: 1;
+}
+
+.submenu-closed {
+  max-height: 0;
+  opacity: 0;
 }
 
 .menu-link {
@@ -173,6 +228,37 @@ body {
 
 .quick-action:hover {
   background: #dbeafe;
+}
+
+.sidebar-collapsed .sidebar {
+  padding: 16px 10px;
+}
+
+.sidebar-collapsed .sidebar h1,
+.sidebar-collapsed .sidebar-subtitle,
+.sidebar-collapsed .sidebar-user,
+.sidebar-collapsed .menu-group-label,
+.sidebar-collapsed .menu-group-caret,
+.sidebar-collapsed .menu-link,
+.sidebar-collapsed .logout-btn {
+  display: none;
+}
+
+.sidebar-collapsed .menu-group {
+  gap: 0;
+}
+
+.sidebar-collapsed .menu-group-toggle {
+  justify-content: center;
+  padding: 8px 0;
+}
+
+.sidebar-collapsed .menu-group-title {
+  font-size: 1.2rem;
+}
+
+.sidebar-collapsed .submenu {
+  display: none;
 }
 
 .grid-2 {

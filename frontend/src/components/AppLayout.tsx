@@ -1,3 +1,4 @@
+import { useMemo, useState } from 'react'
 import { NavLink, Outlet, useLocation } from 'react-router-dom'
 import { useAuth } from '../auth/AuthContext'
 
@@ -65,38 +66,81 @@ const quickActions: QuickAction[] = [
 export function AppLayout() {
   const { user, logout } = useAuth()
   const location = useLocation()
+  const [isSidebarCollapsed, setIsSidebarCollapsed] = useState(false)
 
   const currentLabel =
     menuItems
       .flatMap((group) => group.children)
       .find((child) => child.path === location.pathname)?.label ?? 'Sistema'
 
+  const visibleMenuItems = useMemo(
+    () =>
+      menuItems
+        .map((group) => ({
+          ...group,
+          children: group.children.filter(
+            (item) => !item.onlyRole || item.onlyRole === user?.role,
+          ),
+        }))
+        .filter((group) => group.children.length > 0),
+    [user?.role],
+  )
+
+  const [openGroups, setOpenGroups] = useState<Record<string, boolean>>({
+    gestao: true,
+    comercial: true,
+    estoque: true,
+  })
+
+  const toggleGroup = (groupKey: string) => {
+    if (isSidebarCollapsed) {
+      setIsSidebarCollapsed(false)
+      return
+    }
+    setOpenGroups((prev) => ({ ...prev, [groupKey]: !prev[groupKey] }))
+  }
+
   return (
-    <div className="app-shell">
+    <div className={isSidebarCollapsed ? 'app-shell sidebar-collapsed' : 'app-shell'}>
       <aside className="sidebar">
-        <h1>ERP Fashion</h1>
-        <p className="sidebar-subtitle">Servidor local</p>
+        <div className="sidebar-head">
+          <div>
+            <h1>ERP Fashion</h1>
+            <p className="sidebar-subtitle">Servidor local</p>
+          </div>
+          <button
+            type="button"
+            className="sidebar-toggle"
+            onClick={() => setIsSidebarCollapsed((prev) => !prev)}
+            title={isSidebarCollapsed ? 'Expandir menu' : 'Colapsar menu'}
+          >
+            {isSidebarCollapsed ? '»' : '«'}
+          </button>
+        </div>
         <p className="sidebar-user">
           Perfil: <b>{user?.role}</b>
           <br />
           Usuario: <b>{user?.name}</b>
         </p>
         <nav className="menu">
-          {menuItems
-            .map((group) => {
-              const visibleChildren = group.children.filter(
-                (item) => !item.onlyRole || item.onlyRole === user?.role,
-              )
-              if (visibleChildren.length === 0) {
-                return null
-              }
+          {visibleMenuItems.map((group) => {
+              const isOpen = !!openGroups[group.key]
               return (
                 <section key={group.key} className="menu-group">
-                  <p className="menu-group-title">
-                    <span>{group.icon}</span> {group.label}
-                  </p>
-                  <div className="submenu">
-                    {visibleChildren.map((item) => (
+                  <button
+                    type="button"
+                    className="menu-group-toggle"
+                    onClick={() => toggleGroup(group.key)}
+                    title={group.label}
+                  >
+                    <span className="menu-group-title">
+                      <span>{group.icon}</span>
+                      <span className="menu-group-label">{group.label}</span>
+                    </span>
+                    <span className="menu-group-caret">{isOpen ? '▾' : '▸'}</span>
+                  </button>
+                  <div className={isOpen ? 'submenu submenu-open' : 'submenu submenu-closed'}>
+                    {group.children.map((item) => (
                       <NavLink
                         key={item.path}
                         to={item.path}
