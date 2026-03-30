@@ -11,7 +11,8 @@ export function EstoquePage() {
         <p>Controle por SKU de grade (cor x tamanho).</p>
       </header>
       <article className="card">
-        <table>
+        <div className="table-wrap">
+        <table className="data-table">
           <thead>
             <tr>
               <th>SKU</th>
@@ -35,6 +36,7 @@ export function EstoquePage() {
             ))}
           </tbody>
         </table>
+        </div>
       </article>
     </section>
   )

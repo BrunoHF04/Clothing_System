@@ -44,21 +44,21 @@ export function DashboardPage() {
       </header>
 
       <div className="grid-4">
-        <article className="card">
+        <article className="card stat-card">
           <h3>Faturamento Diario</h3>
-          <strong>R$ {summary?.faturamentoDiario.toFixed(2) ?? '0,00'}</strong>
+          <strong className="stat-value">R$ {summary?.faturamentoDiario.toFixed(2) ?? '0,00'}</strong>
         </article>
-        <article className="card">
+        <article className="card stat-card">
           <h3>Inadimplencia</h3>
-          <strong>R$ {summary?.inadimplencia.toFixed(2) ?? '0,00'}</strong>
+          <strong className="stat-value">R$ {summary?.inadimplencia.toFixed(2) ?? '0,00'}</strong>
         </article>
-        <article className="card">
+        <article className="card stat-card">
           <h3>Itens em Consignacao</h3>
-          <strong>{summary?.itensEmConsignacao ?? 0} pecas</strong>
+          <strong className="stat-value">{summary?.itensEmConsignacao ?? 0} pecas</strong>
         </article>
-        <article className="card">
+        <article className="card stat-card">
           <h3>Caixa Aberto</h3>
-          <strong>{summary?.caixaAberto ? 'Aberto' : 'Fechado'}</strong>
+          <strong className="stat-value">{summary?.caixaAberto ? 'Aberto' : 'Fechado'}</strong>
         </article>
       </div>
 
@@ -70,7 +70,10 @@ export function DashboardPage() {
             <b>{health.db}</b>
           </p>
         )}
-        <p>Consignacoes atrasadas: <b>{summary?.consignacoesAtrasadas ?? 0}</b></p>
+        <p>
+          Consignacoes atrasadas:{' '}
+          <span className="status-pill status-pill-warn">{summary?.consignacoesAtrasadas ?? 0}</span>
+        </p>
         {error && <p className="error">{error}</p>}
       </article>
     </section>

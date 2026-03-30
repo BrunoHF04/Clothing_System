@@ -16,6 +16,7 @@ export type MenuItem = {
 export type QuickAction = {
   path: string
   label: string
+  icon: 'home' | 'sale' | 'consignacao' | 'cliente'
   onlyRole?: UserRole
 }
 
@@ -59,8 +60,8 @@ export const menuItems: MenuItem[] = [
 ]
 
 export const quickActions: QuickAction[] = [
-  { path: '/inicio', label: 'Tela Inicial' },
-  { path: '/pdv', label: 'Nova Venda' },
-  { path: '/consignacao', label: 'Nova Consignacao' },
-  { path: '/clientes', label: 'Novo Cliente' },
+  { path: '/inicio', label: 'Tela Inicial', icon: 'home' },
+  { path: '/pdv', label: 'Nova Venda', icon: 'sale' },
+  { path: '/consignacao', label: 'Nova Consignacao', icon: 'consignacao' },
+  { path: '/clientes', label: 'Novo Cliente', icon: 'cliente' },
 ]
