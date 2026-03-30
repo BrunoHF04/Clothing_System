@@ -44,6 +44,12 @@ body {
   font-size: 0.9rem;
 }
 
+.sidebar-user {
+  margin: 0 0 16px;
+  font-size: 0.85rem;
+  color: #c7d2fe;
+}
+
 .menu {
   display: flex;
   flex-direction: column;
@@ -68,6 +74,16 @@ body {
 
 .content {
   padding: 24px;
+}
+
+.logout-btn {
+  width: 100%;
+  margin-top: 20px;
+  background: #dc2626;
+}
+
+.logout-btn:hover {
+  background: #b91c1c;
 }
 
 .page-header {
@@ -102,6 +118,12 @@ body {
   grid-template-columns: repeat(4, minmax(0, 1fr));
   gap: 16px;
   margin-bottom: 16px;
+}
+
+.grid-3 {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16px;
 }
 
 .form-grid {
@@ -160,12 +182,44 @@ td {
   color: #b91c1c;
 }
 
+.login-screen {
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  background: linear-gradient(135deg, #111827 0%, #1e3a8a 100%);
+  padding: 20px;
+}
+
+.login-card {
+  width: min(420px, 100%);
+  background: #ffffff;
+  border-radius: 14px;
+  padding: 24px;
+  box-shadow: 0 10px 24px rgba(2, 6, 23, 0.35);
+  display: grid;
+  gap: 12px;
+}
+
+.login-card h1 {
+  margin: 0;
+  font-size: 1.4rem;
+}
+
+.login-card p {
+  margin: 0 0 8px;
+  color: #4b5563;
+}
+
 @media (max-width: 1100px) {
   .app-shell {
     grid-template-columns: 1fr;
   }
 
   .grid-4 {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .grid-3 {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
@@ -176,6 +230,7 @@ td {
 
 @media (max-width: 680px) {
   .grid-2,
+  .grid-3,
   .grid-4,
   .form-grid {
     grid-template-columns: 1fr;

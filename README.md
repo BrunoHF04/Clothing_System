@@ -31,14 +31,28 @@ CREATE DATABASE fashion_erp;
 - `HTTP_ADDR` (padrao `:3333`)
 - `DATABASE_URL` (padrao `postgres://postgres:postgres@localhost:5432/fashion_erp?sslmode=disable`)
 
-5. Instale dependencias e execute:
+5. Instale dependencias e execute API:
 
 ```bash
 go mod tidy
 go run ./cmd/api
 ```
 
-## Endpoint inicial
+6. Frontend:
+
+```bash
+cd frontend
+npm install
+npm run dev
+```
+
+## Endpoints iniciais
 
 - `GET /health`
   - Verifica status da API e conexao com banco.
+- `POST /auth/login`
+  - Login inicial local (dev): senha `123456`
+  - Usuario `dono` ou `admin` retorna perfil DONO
+  - Outros usuarios retornam perfil VENDEDOR
+- `GET /dashboard/summary`
+  - Resumo de indicadores para o dashboard
